@@ -11,6 +11,9 @@
 </head>
 <body>
   <div id="map"></div>
+  <h1> Bike spaces nearby </h1>
+  <br>
+  <br>
   <% responseObj.forEach(function(response) { %>
   Place name: <%= response.place_name%>
   <br>
@@ -23,15 +26,13 @@
   <% }) %>
 
   <script>
-  // document.addEventListener('load', init(), false);
-  //
-  // function init() {
-  //   var mapDiv = document.getElementById('map')
-  //   var map = new google.maps.Map(mapDiv, {
-  //     center: {lat: 51 , lng: -0.06},
-  //     zoom: 15
-  //   });
-  // }
+  function init() {
+    var mapDiv = document.getElementById('map')
+    var map = new google.maps.Map(mapDiv, {
+      center: {lat: 51 , lng: -0.06},
+      zoom: 15
+    });
+  }
     <% responseObj.forEach(function(response) { %>
   document.getElementById(<%=response.place_id%>).addEventListener("click", function() {
     initMap(<%= response.place_lat %>, <%= response.place_lon%>);
@@ -39,13 +40,21 @@
   <% }) %>
 
   function initMap(x,y) {
+    var myLatLng = {lat: x , lng: y};
+
     var mapDiv = document.getElementById('map')
     var map = new google.maps.Map(mapDiv, {
-      center: {lat: x , lng: y},
-      zoom: 20
-    });
+      center: myLatLng,
+      zoom: 16
+      });
+
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: "Hello World"
+      });
   }
   </script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0YshuaHNZ0p99ryvYNa4cdYxjnrzUOp0&callback=initMap"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0YshuaHNZ0p99ryvYNa4cdYxjnrzUOp0&callback=init"></script>
 </body>
 </html>
