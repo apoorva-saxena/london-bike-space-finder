@@ -19,11 +19,16 @@ router.get('/', function(req, res, next) {
             var obj = JSON.parse(body);
             responseObj = [];
             places = obj.places;
+            var i = 0;
             places.forEach(function(place) {
-
+console.log(place.lat);
+                i++;
                 responseObj.push({
+                    place_id: i,
                     place_name: place.commonName,
                     distance: place.distance,
+                    place_lat: place.lat,
+                    place_lon: place.lon,
                     map: "https://www.google.co.uk/maps/preview/@"+place.lat+","+place.lon+",16z"
                 });
                 // res.json(responseObj);
