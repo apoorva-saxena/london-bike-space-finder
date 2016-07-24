@@ -23,6 +23,8 @@
     <form action="/bikeSpace" method="GET">
         Radius:
         <input type="text" name="radius" id="radius" placeholder="Enter radius in meters">
+        <input type="hidden" name="latitude" id="lat1">
+        <input type="hidden" name="longitude" id="lon1">
         <br>
         <br>
         <button>Get nearby places</button>
@@ -35,13 +37,16 @@
             } else {
                 console.log("Geolocation not supported by browser");
             }
-          }
-            function displayPosition(position) {
-                document.getElementById("lat").innerHTML = position.coords.latitude;
-                document.getElementById('lon').innerHTML = position.coords.longitude;
-                window.latitude = position.coords.latitude
-                window.longitude = position.coords.longitude
-            }
+        }
+
+        function displayPosition(position) {
+            document.getElementById("lat").innerHTML = position.coords.latitude;
+            document.getElementById('lon').innerHTML = position.coords.longitude;
+            document.getElementById("lat1").value = position.coords.latitude;
+            document.getElementById("lon1").value = position.coords.longitude;
+            window.latitude = position.coords.latitude
+            window.longitude = position.coords.longitude
+        }
     </script>
 </body>
 
