@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+</head>
+
+<body>
     <h1><%= title %></h1>
     <p>Welcome to London bike space finder</p>
-    <form>
-      <a href='/bikeSpace'> Find a bike space in 1.5 km radius </a>
+    <button onclick="GetLonLat()">get coordinates</button>
+    <br>
+    <br>
+    <label for="latitude">Latitude: </label>
+    <div id="lat"> 0</div>
+    <label for="longitude">Longitude: </label>
+    <div id="lon"> 0 </div>
+    <br>
+    <br>
+    <form action="/bikeSpace" method="GET">
+        Radius:
+        <input type="text" name="radius" id="radius" placeholder="Enter radius in meters">
+        <br>
+        <br>
+        <button>Get nearby places</button>
     </form>
+    <script>
+        function GetLonLat() {
+            if (navigator.geolocation) {
+                var timeoutVal = 10 * 1000 * 1000;
+                navigator.geolocation.getCurrentPosition(displayPosition);
+            } else {
+                console.log("Geolocation not supported by browser");
+            }
+          }
+            function displayPosition(position) {
+                document.getElementById("lat").innerHTML = position.coords.latitude;
+                document.getElementById('lon').innerHTML = position.coords.longitude;
+                window.latitude = position.coords.latitude
+                window.longitude = position.coords.longitude
+            }
+    </script>
+</body>
 
 </html>
